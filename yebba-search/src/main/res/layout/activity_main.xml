@@ -1,15 +1,19 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:background="#FFFFFF">
 
     <LinearLayout
+        android:id="@+id/layout_top_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp"
+        android:orientation="horizontal"
+        android:padding="10dp"
         android:background="#FFFFFF"
         android:elevation="4dp"
-        android:orientation="horizontal">
+        android:gravity="center_vertical">
 
         <EditText
             android:id="@+id/search_bar"
@@ -17,23 +21,90 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="Search YEBBA or type URL"
-            android:imeOptions="actionSearch"
             android:inputType="textUri"
+            android:imeOptions="actionSearch"
             android:padding="12dp"
-            android:background="@android:drawable/editbox_background"/>
+            android:background="@android:drawable/editbox_background"
+            android:textSize="14sp" />
 
         <Button
             android:id="@+id/btn_go"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:text="GO"
             android:backgroundTint="#007BFF"
-            android:textColor="#FFFFFF"/>
+            android:textColor="#FFFFFF"
+            android:textAllCaps="false" />
     </LinearLayout>
 
     <WebView
         android:id="@+id/yebba_webview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_below="@id/layout_top_bar"
+        android:layout_above="@+id/layout_bottom_nav" />
 
-</LinearLayout>
+    <LinearLayout
+        android:id="@+id/layout_bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:background="#F8F9FA"
+        android:elevation="8dp"
+        android:gravity="center">
+
+        <ImageButton
+            android:id="@+id/nav_back"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@android:drawable/ic_media_previous"
+            android:contentDescription="Back"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            app:tint="#444444" />
+
+        <ImageButton
+            android:id="@+id/nav_forward"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@android:drawable/ic_media_next"
+            android:contentDescription="Forward"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            app:tint="#444444" />
+
+        <ImageButton
+            android:id="@+id/nav_home"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@android:drawable/ic_menu_today"
+            android:contentDescription="Home"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            app:tint="#007BFF" />
+
+        <ImageButton
+            android:id="@+id/nav_share_chat"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@android:drawable/ic_menu_share"
+            android:contentDescription="Share to YEBBA Chat"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            app:tint="#28A745" />
+
+        <ImageButton
+            android:id="@+id/nav_refresh"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@android:drawable/ic_menu_rotate"
+            android:contentDescription="Refresh"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            app:tint="#444444" />
+
+    </LinearLayout>
+
+</RelativeLayout>
