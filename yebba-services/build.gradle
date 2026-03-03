@@ -1,18 +1,24 @@
 plugins {
+    // Only use the Java-compatible Android plugin
     id 'com.android.application'
-    id 'org.jetbrains.kotlin.android'
+    // Add this if you are using Google Services (Firebase)
+    id 'com.google.gms.google-services' 
 }
 
 android {
-    namespace 'com.yebba.search'
+    // Change this for each app: com.yebba.store, com.yebba.search, etc.
+    namespace 'com.yebba.chat' 
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.yebba.services" // Change this for each app (e.g., .chat, .store)
+        // Change this for each app to match the namespace
+        applicationId "com.yebba.services"
         minSdk 24
         targetSdk 34
         versionCode 1
         versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -21,13 +27,38 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    // This helps avoid conflicts with duplicate library files in the APK
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
 }
 
 dependencies {
-    implementation 'androidx.core:core-ktx:1.12.0'
+    // Core Android Libraries
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.11.0'
-    
-    // This allows the apps to talk to the Services module
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
+    // Firebase (Only include if the app uses Chat/Store features)
+    implementation platform('com.google.firebase:firebase-bom:32.7.0')
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-database'
+    implementation 'com.google.firebase:firebase-storage'
+    implementation 'com.google.firebase:firebase-auth'
+
+    // Ecosystem Connection: Link to your Services module
     implementation project(':yebba-services')
+
+    // Testing
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }
