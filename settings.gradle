@@ -1,1 +1,21 @@
-include ':yebba-services', ':yebba-search', ':yebba-store', ':yebba-chat', ':shared-lib'
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+rootProject.name = "YEBBA-Ecosystem"
+include ':yebba-services'
+include ':yebba-search'
+include ':yebba-store'
+include ':yebba-chat'
+
