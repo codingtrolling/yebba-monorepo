@@ -5,17 +5,22 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
+
 dependencyResolutionManagement {
+    // This line enforces that ALL modules use these repositories
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
         mavenCentral()
+        // Adding JitPack in case you want to use custom GitHub libraries later
+        maven { url 'https://jitpack.io' }
     }
 }
 
 rootProject.name = "YEBBA-Ecosystem"
+
+// Include only the apps you have currently created on GitHub Web
 include ':yebba-services'
-include ':yebba-search'
 include ':yebba-store'
 include ':yebba-chat'
-
+include ':yebba-search'
