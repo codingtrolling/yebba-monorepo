@@ -22,7 +22,11 @@ android {
             minifyEnabled false
         }
     }
-
+    buildFeatures {
+        aidl true  // 🔥 THIS IS WHAT YOU ARE MISSING
+    }
+}
+    
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
