@@ -1,6 +1,6 @@
 plugins {
     // Only use the Java-compatible Android plugin
-    id 'com.android.application'
+    id 'com.android.library'
     // Add this if you are using Google Services (Firebase)
     id 'com.google.gms.google-services' 
 }
