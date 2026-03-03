@@ -1,0 +1,67 @@
+{
+  "project_info": {
+    "project_number": "994236612132",
+    "project_id": "yebba-98a88",
+    "storage_bucket": "yebba-98a88.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:994236612132:android:ad6f35ffdef4a305dae2b1",
+        "android_client_info": {
+          "package_name": "com.yebba.chat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSFg7EbF2xpZcLlcjzeTPPXqw1AujEkew"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:994236612132:android:bd568f0b3cb3dcb7dae2b1",
+        "android_client_info": {
+          "package_name": "com.yebba.search"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSFg7EbF2xpZcLlcjzeTPPXqw1AujEkew"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:994236612132:android:32440013cda082b5dae2b1",
+        "android_client_info": {
+          "package_name": "com.yebba.store"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSFg7EbF2xpZcLlcjzeTPPXqw1AujEkew"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
