@@ -3,16 +3,19 @@ plugins {
 }
 
 android {
+    // This replaces the "package" attribute in the Manifest
     namespace 'com.yebba.services'
     compileSdk 34
 
     defaultConfig {
         minSdk 24
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        // Standard for libraries
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildFeatures {
-        aidl true // 🔥 Needed for your IYebbaServiceInterface
+        aidl true
     }
 
     compileOptions {
@@ -25,6 +28,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        debug {
+            minifyEnabled false
+        }
     }
 }
 
@@ -32,21 +38,8 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.11.0'
     
-    // Firebase
+    // Firebase - Use the BOM to manage versions automatically
     implementation platform('com.google.firebase:firebase-bom:32.7.0')
     implementation 'com.google.firebase:firebase-database'
     implementation 'com.google.firebase:firebase-auth'
-}
-
-// Disable the annotation extractor that was crashing earlier
-tasks.withType(JavaCompile).configureEach {
-    options.compilerArgs << "-Xlint:-options"
-}
-
-afterEvaluate {
-    tasks.all { task ->
-        if (task.name.contains("extractDebugAnnotations")) {
-            task.enabled = false
-        }
-    }
 }
