@@ -25,16 +25,16 @@ jobs:
 
     # Building apps individually to prevent RAM timeout and show clear logs
     - name: Build YEBBA Services
-      run: ./gradlew :yebba-services:assembleDebug
+      run: ./gradlew :yebba-services:assembleDebug --no-daemon
 
     - name: Build YEBBA Store
-      run: ./gradlew :yebba-store:assembleDebug
+      run: ./gradlew :yebba-store:assembleDebug --no-daemon
 
     - name: Build YEBBA Chat
-      run: ./gradlew :yebba-chat:assembleDebug
+      run: ./gradlew :yebba-chat:assembleDebug --no-daemon
 
     - name: Build YEBBA Search
-      run: ./gradlew :yebba-search:assembleDebug
+      run: ./gradlew :yebba-search:assembleDebug --no-daemon
 
     # Uploading the results so you can download them to your Redmi 10
     - name: Upload APKs
