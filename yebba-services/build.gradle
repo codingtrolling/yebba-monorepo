@@ -1,5 +1,4 @@
 plugins {
-    // This MUST be library. Application is for the other 3 apps.
     id 'com.android.library'
 }
 
@@ -8,9 +7,17 @@ android {
     compileSdk 34
 
     defaultConfig {
-        // NO applicationId here. Libraries are not allowed to have them.
         minSdk 24
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildFeatures {
+        aidl true // 🔥 Needed for your IYebbaServiceInterface
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 
     buildTypes {
@@ -18,41 +25,28 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-        debug {
-            minifyEnabled false
-        }
-    }
-    buildFeatures {
-        aidl true  // 🔥 THIS IS WHAT YOU ARE MISSING
-    }
-}
-    
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
     }
 }
 
 dependencies {
-    // Core AndroidX libraries for background logic
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.11.0'
-
-    // Firebase (Shared across the whole YEBBA ecosystem)
+    
+    // Firebase
     implementation platform('com.google.firebase:firebase-bom:32.7.0')
     implementation 'com.google.firebase:firebase-database'
     implementation 'com.google.firebase:firebase-auth'
-    implementation 'com.google.firebase:firebase-storage'
 }
 
-// 🔥 THE FIX: This kills the "extractDebugAnnotations FAILED" error
-// It tells Gradle to stop wasting time scanning for annotations that crash the build.
-tasks.withType(JavaCompile) {
+// Disable the annotation extractor that was crashing earlier
+tasks.withType(JavaCompile).configureEach {
     options.compilerArgs << "-Xlint:-options"
 }
 
-tasks.whenTaskAdded { task ->
-    if (task.name.contains("extractDebugAnnotations")) {
-        task.enabled = false
+afterEvaluate {
+    tasks.all { task ->
+        if (task.name.contains("extractDebugAnnotations")) {
+            task.enabled = false
+        }
     }
 }
