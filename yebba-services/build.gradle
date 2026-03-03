@@ -1,6 +1,6 @@
 plugins {
-    // 1. MUST be library, NOT application
-    id 'com.android.library' 
+    // This MUST be library. Application is for the other 3 apps.
+    id 'com.android.library'
 }
 
 android {
@@ -8,10 +8,19 @@ android {
     compileSdk 34
 
     defaultConfig {
-        // 2. DELETE 'applicationId' - Libraries are not allowed to have one
+        // NO applicationId here. Libraries are not allowed to have them.
         minSdk 24
-        
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+        }
     }
 
     compileOptions {
@@ -21,12 +30,25 @@ android {
 }
 
 dependencies {
-    // Basic Android stuff for your background services
+    // Core AndroidX libraries for background logic
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.11.0'
-    
-    // Firebase (Shared across all apps)
+
+    // Firebase (Shared across the whole YEBBA ecosystem)
     implementation platform('com.google.firebase:firebase-bom:32.7.0')
     implementation 'com.google.firebase:firebase-database'
     implementation 'com.google.firebase:firebase-auth'
+    implementation 'com.google.firebase:firebase-storage'
+}
+
+// 🔥 THE FIX: This kills the "extractDebugAnnotations FAILED" error
+// It tells Gradle to stop wasting time scanning for annotations that crash the build.
+tasks.withType(JavaCompile) {
+    options.compilerArgs << "-Xlint:-options"
+}
+
+tasks.whenTaskAdded { task ->
+    if (task.name.contains("extractDebugAnnotations")) {
+        task.enabled = false
+    }
 }
