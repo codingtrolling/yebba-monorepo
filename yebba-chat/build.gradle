@@ -42,20 +42,27 @@ android {
 }
 
 dependencies {
+    // Ecosystem Connection: Link to your Services module
+    implementation project(':yebba-services')
+
     // Core Android Libraries
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.11.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.recyclerview:recyclerview:1.3.2' // 🔥 Essential for Chat Lists
+    implementation 'androidx.cardview:cardview:1.0.0'       // 🔥 Essential for Chat Bubbles
 
-    // Firebase (Only include if the app uses Chat/Store features)
+    // Firebase (Using BOM to keep versions in sync)
     implementation platform('com.google.firebase:firebase-bom:32.7.0')
     implementation 'com.google.firebase:firebase-analytics'
-    implementation 'com.google.firebase:firebase-database'
-    implementation 'com.google.firebase:firebase-storage'
     implementation 'com.google.firebase:firebase-auth'
+    implementation 'com.google.firebase:firebase-database'  // Realtime DB
+    implementation 'com.google.firebase:firebase-firestore' // 🔥 Added Firestore
+    implementation 'com.google.firebase:firebase-storage'   // For sending images/voice
 
-    // Ecosystem Connection: Link to your Services module
-    implementation project(':yebba-services')
+    // Glide (If your chat shows user photos or sent images)
+    implementation 'com.github.bumptech.glide:glide:4.16.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.16.0'
 
     // Testing
     testImplementation 'junit:junit:4.13.2'
