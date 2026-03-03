@@ -21,7 +21,8 @@ jobs:
         cache: gradle
 
     - name: Grant Execute Permission for Gradlew
-      run: chmod +x gradlew
+      run: gradle wrapper --gradle-version 8.4
+         chmod +x gradlew
 
     # Building apps individually to prevent RAM timeout and show clear logs
     - name: Build YEBBA Services
