@@ -9,6 +9,15 @@
         android:allowBackup="true"
         android:label="YEBBA Store"
         android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
+<provider
+    android:name="androidx.core.content.FileProvider"
+    android:authorities="com.yebba.store.fileprovider"
+    android:exported="false"
+    android:grantUriPermissions="true">
+    <meta-data
+        android:name="android.support.FILE_PATHS"
+        android:resource="@xml/file_paths" />
+</provider>
         
         <activity
             android:name=".MainActivity"
