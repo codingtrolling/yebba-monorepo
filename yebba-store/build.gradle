@@ -1,18 +1,21 @@
 plugins {
     id 'com.android.application'
-    id 'org.jetbrains.kotlin.android'
+    // Optional: Add Google Services plugin if using Firebase
+    // id 'com.google.gms.google-services' 
 }
 
 android {
-    namespace 'com.yebba.search'
+    namespace 'com.yebba.store'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.yebba.store" // Change this for each app (e.g., .chat, .store)
+        applicationId "com.yebba.store"
         minSdk 24
         targetSdk 34
         versionCode 1
         versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnit4"
     }
 
     buildTypes {
@@ -21,13 +24,35 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
 }
 
 dependencies {
-    implementation 'androidx.core:core-ktx:1.12.0'
+    // Core Android Libraries
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.11.0'
-    
-    // This allows the apps to talk to the Services module
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
+    // The Ecosystem Bridge (Connects Store to Yebba Services)
     implementation project(':yebba-services')
+
+    // Networking for "Publishing" APKs (Retrofit or Firebase)
+    // Using Firebase for the "Community Store" backend hosting
+    implementation platform('com.google.firebase:firebase-bom:32.7.0')
+    implementation 'com.google.firebase:firebase-storage'
+    implementation 'com.google.firebase:firebase-firestore'
+    implementation 'com.google.firebase:firebase-auth'
+
+    // Image Loading (For App Icons in the Store)
+    implementation 'com.github.bumptech.glide:glide:4.16.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.16.0'
+
+    // Testing
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }
