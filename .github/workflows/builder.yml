@@ -3,7 +3,7 @@ name: YEBBA Ecosystem Builder
 on:
   push:
     branches: [ "main" ]
-  workflow_dispatch: # Allows you to manually trigger the build from the Actions tab
+  workflow_dispatch:
 
 jobs:
   build:
@@ -20,11 +20,11 @@ jobs:
         distribution: 'temurin'
         cache: gradle
 
-    - name: Grant Execute Permission for Gradlew
-      run: gradle wrapper --gradle-version 8.4
-         chmod +x gradlew
+    - name: Setup Gradle Wrapper
+      run: |
+        gradle wrapper --gradle-version 8.4
+        chmod +x gradlew
 
-    # Building apps individually to prevent RAM timeout and show clear logs
     - name: Build YEBBA Services
       run: ./gradlew :yebba-services:assembleDebug --no-daemon
 
@@ -37,13 +37,9 @@ jobs:
     - name: Build YEBBA Search
       run: ./gradlew :yebba-search:assembleDebug --no-daemon
 
-    # Uploading the results so you can download them to your Redmi 10
     - name: Upload APKs
       uses: actions/upload-artifact@v4
       with:
         name: YEBBA-Ecosystem-APKs
         path: |
-          yebba-services/build/outputs/apk/debug/*.apk
-          yebba-store/build/outputs/apk/debug/*.apk
-          yebba-chat/build/outputs/apk/debug/*.apk
-          yebba-search/build/outputs/apk/debug/*.apk
+          **/build/outputs/apk/debug/*.apk
