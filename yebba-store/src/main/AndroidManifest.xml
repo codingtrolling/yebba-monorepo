@@ -19,6 +19,11 @@
         android:resource="@xml/file_paths" />
 </provider>
         
+<receiver android:name=".DownloadReceiver" android:exported="true">
+    <intent-filter>
+        <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
+    </intent-filter>
+</receiver>
         <activity
             android:name=".MainActivity"
             android:exported="true">
