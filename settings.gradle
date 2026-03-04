@@ -14,7 +14,11 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "yebba-monorepo"
+
 include ':yebba-services'
 include ':yebba-store'
 include ':yebba-chat'
-include ':yebba-search' // 🔥 This must be here!
+
+// Force-map the search directory
+include ':yebba-search'
+project(':yebba-search').projectDir = new File(settingsDir, 'yebba-search')
